@@ -86,7 +86,7 @@ namespace MvcMovie.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie
+            [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie
         )
         {
             if (ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie
+            [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie
         )
         {
             if (id != movie.Id)
@@ -170,6 +170,7 @@ namespace MvcMovie.Controllers
         }
 
         // POST: Movies/Delete/5
+        // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -182,11 +183,6 @@ namespace MvcMovie.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool MovieExists(int id)
-        {
-            return _context.Movie.Any(e => e.Id == id);
         }
     }
 }
