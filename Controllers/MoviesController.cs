@@ -56,7 +56,7 @@ namespace MvcMovie.Controllers
             return View(movieGenreVM);
         }
 
-        [HttpPost]
+        // [HttpPost]
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -170,7 +170,6 @@ namespace MvcMovie.Controllers
         }
 
         // POST: Movies/Delete/5
-        // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -183,6 +182,11 @@ namespace MvcMovie.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool MovieExists(int id)
+        {
+            return _context.Movie.Any(e => e.Id == id);
         }
     }
 }
